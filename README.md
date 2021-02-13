@@ -35,7 +35,3 @@ yarn install
 npm run start
 
 ```
-
-## Full step by step video tutorial
-
-- [Youtube](https://www.youtube.com/watch?v=4Siz4HHJYDQ)
