@@ -1,9 +1,14 @@
 import React, {useState, useEffect, Fragment, useCallback } from 'react';
 import initialElements from './initial-elements';
 import ReactFlow, {removeElements,addEdge, Background, Controls, MiniMap} from 'react-flow-renderer';
+import Per_action from './Per_action';
 
+// For click event on Elements    
+const onElementClick = (event, element) => console.log('click', event) 
 
-
+const nodeTypes = {
+    selectorNode: Per_action,
+  };
 const BioMed = () => {
 
     const [reactflowInstance, setReactflowInstance] = useState(null);
@@ -11,8 +16,7 @@ const BioMed = () => {
     const [elements, setElements] = useState(initialElements);
     // New node
     const [name, setName] = useState("")
-    //for performing action
-    const [sum,newsum] = useState(null)
+
     
     //Adding new node to the graph
     const addNode = () => {
@@ -28,30 +32,17 @@ const BioMed = () => {
           setElements((els) => removeElements(elementsToRemove, els)),
         []
       );
-
-    // For click event on Elements    
-    const onElementClick = (event, element) => console.log('click', element) 
-     
-    //To bring the add operation in effect
+   
+    //To bring the operation in effect
      useEffect (()=>{
          const onChange = (event) =>{
              setElements((els)=>els.map((e)=>{
+                console.log("Working !!!")
              if(e.id === '1'){
                  console.log("Working !!!")
                  return e
              }
-             const perform = event.target.values
-             newsum(perform)
-             console.log('Prb 1')
-             newsum(console.log('GGGGGGGG'))
 
-             return {
-                ...e,
-                data: {
-                  ...e.data,
-                  perform,
-                },
-            }
             }))
          }
      })
@@ -84,6 +75,7 @@ const BioMed = () => {
             onElementsRemove={onElementsRemove}
             onElementClick ={onElementClick}
             onLoad={onLoad}
+            nodeTypes={nodeTypes}
             style={{width:'100%',height: '90vh'}}
             onConnect = {onConnect}
             connectionLineStyle={{stroke: "#ddd", strokeWidth: 2}}

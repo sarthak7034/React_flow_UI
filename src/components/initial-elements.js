@@ -1,9 +1,9 @@
-import React, {memo} from 'react';
-import { Handle } from 'react-flow-renderer';
+import React from 'react';
+import Per_action from './Per_action';
 
 const initialElements = ([
     
-    {id: '1', type: 'input', data:{onChange: onChange,label: <strong>Input</strong>}, position: {x:0,y:0}},
+    {id: '1', type: 'input', data:{label: <strong>Input</strong>,onChange:Per_action.onChange}, position: {x:0,y:0}}, 
     {id: '2', type: 'default', data:{label: 'Decision'}, position: {x:0,y:100}},
     {id: '3', type: 'output', data:{label: <strong>Output</strong>}, position: {x:0,y:200}},
     {
@@ -126,19 +126,4 @@ const initialElements = ([
     //   }
 ])
 
- memo(({ data }) => {
-  return (
-    <>
-      <Handle
-        onConnect={(params) => console.log('handle onConnect', params)}
-      />
-      <input
-        id='1'
-        type='input'
-        onChange={data.onChange}
-      />
-
-    </>
-  );
-});
 export default initialElements;
