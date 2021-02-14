@@ -1,4 +1,4 @@
-# React Mind Node App
+# React BioMed
 
 This is project created on React using React Hooks and [React Flow Renderer](https://www.npmjs.com/package/react-flow-renderer).
 
