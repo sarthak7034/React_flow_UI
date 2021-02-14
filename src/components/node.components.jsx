@@ -4,16 +4,20 @@ import ReactFlow, {removeElements,addEdge, Background, Controls, MiniMap} from '
 import Per_action from './Per_action';
 
 // For click event on Elements    
-const onElementClick = (event, element) => console.log('click', event) 
+const onElementClick = (event, element) => {
+  // if (event.id === "2") {
+  //   alert ("I was the test")
+  // }
+}
 
 const nodeTypes = {
-    selectorNode: Per_action,
+    customNode: Per_action,
   };
 const BioMed = () => {
 
     const [reactflowInstance, setReactflowInstance] = useState(null);
     //Getting all the node elements
-    const [elements, setElements] = useState(initialElements);
+    const [elements, setElements] = useState([]);
     // New node
     const [name, setName] = useState("")
 
@@ -22,7 +26,7 @@ const BioMed = () => {
     const addNode = () => {
         setElements(e => e.concat({
             id: (e.length+1).toString(),
-            data: {label: `${name}`},
+            data: {label: `${name}` },
             position: {x: Math.random() * window.innerWidth, y: Math.random() * window.innerHeight}
         }));
     };
@@ -34,19 +38,6 @@ const BioMed = () => {
       );
    
     //To bring the operation in effect
-     useEffect (()=>{
-         const onChange = (event) =>{
-             setElements((els)=>els.map((e)=>{
-                console.log("Working !!!")
-             if(e.id === '1'){
-                 console.log("Working !!!")
-                 return e
-             }
-
-            }))
-         }
-     })
-
      useEffect(() => {
         if (reactflowInstance && elements.length > 0) {
         reactflowInstance.fitView();
@@ -60,6 +51,8 @@ const BioMed = () => {
     // }
     const onLoad = useCallback(
         (rfi) => {
+          // initialElements.data.map((item) => (item.id === "1") ? item.data.onChange = handleEntryChange() : item.data.onChange = handleExitChange())
+          setElements(initialElements)
           if (!reactflowInstance) {
             setReactflowInstance(rfi);
             console.log('flow loaded:', rfi);
@@ -88,12 +81,7 @@ const BioMed = () => {
                 color="#888"
                 gap={16}
                 />
-                <MiniMap
-                nodeColor={n=>{
-                    if(n.type === 'input') return 'blue';
-                    
-                    return '#FFCC00'
-                }} />
+                <MiniMap />
                 <Controls />
                 </ReactFlow>
 
